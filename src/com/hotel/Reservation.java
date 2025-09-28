@@ -1,0 +1,22 @@
+package com.hotel;
+
+public class Reservation {
+    private int reserveID;
+    private Guest guest;
+    private Room room;
+    private String InDate;
+    private String OutDate;
+
+    public Reservation(int reserveID, Guest guest, Room room, String InDate, String OutDate) {
+        this.reserveID = reserveID;
+        this.guest = guest;
+        this.room = room;
+        this.InDate = InDate;
+        this.OutDate = OutDate;
+        room.setAvail(false); // Mark the room as unavailable when reserved
+    }
+
+    public String toString() {
+        return "Reservation ID: " + reserveID + "| " + guest.toString() + "| " + room.toString() + "| Check-In: " + InDate + "| Check-Out: " + OutDate;
+    }
+}
