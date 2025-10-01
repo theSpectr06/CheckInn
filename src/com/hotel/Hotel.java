@@ -40,4 +40,36 @@ public class Hotel {
     public String toString() {
         return "Hotel Name: " + name + "| Address: " + address + "| Total Rooms: " + rooms.size();
     }
+
+    // Search room by room number
+    public Room searchRoomByNumber(int roomNumber) {
+        for (Room room : rooms) {
+            if (room.getRoomNo() == roomNumber) {
+                return room;
+            }
+        }
+        return null; // Not found
+    }
+
+    // Search rooms by type
+    public List<Room> searchRoomsByType(String type) {
+        List<Room> results = new ArrayList<>();
+        for (Room room : rooms) {
+            if (room.getType().equalsIgnoreCase(type)) {
+                results.add(room);
+            }
+        }
+        return results;
+    }
+
+    // Search available rooms
+    public List<Room> searchAvailableRooms() {
+        List<Room> results = new ArrayList<>();
+        for (Room room : rooms) {
+            if (room.isAvailable()) {
+                results.add(room);
+            }
+        }
+        return results;
+    }
 }

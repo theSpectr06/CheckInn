@@ -40,5 +40,20 @@ public class Main {
         for (Room r : hotel.getRooms()) {
             System.out.println(r);
         }
+
+        System.out.println("\nSearch by room number (102):");
+        Room found = hotel.searchRoomByNumber(102);
+        System.out.println(found != null ? found : "Room not found.");
+
+        System.out.println("\nSearch rooms by type (Double):");
+        for (Room r : hotel.searchRoomsByType("Double")) {
+            System.out.println(r);
+        }
+
+        System.out.println("\nSearch available rooms:");
+        for (Room r : hotel.searchAvailableRooms()) {
+            System.out.println(r);
+        }
     }
+    
 }
