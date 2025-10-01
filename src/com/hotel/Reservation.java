@@ -1,5 +1,8 @@
 package com.hotel;
 
+import com.hotel.exceptions.InvalidReservationException;
+
+
 public class Reservation {
     private int reserveID;
     private Guest guest;
@@ -7,7 +10,13 @@ public class Reservation {
     private String InDate;
     private String OutDate;
 
-    public Reservation(int reserveID, Guest guest, Room room, String InDate, String OutDate) {
+    public Reservation(int reserveID, Guest guest, Room room, String InDate, String OutDate) 
+    throws InvalidReservationException {
+
+        if (OutDate.compareTo(InDate) < 0) {  // simple string comparison; you can replace with Date later
+                    throw new InvalidReservationException("Check-out date cannot be before check-in date!");
+                }
+        
         this.reserveID = reserveID;
         this.guest = guest;
         this.room = room;
