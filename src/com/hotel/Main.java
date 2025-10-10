@@ -1,59 +1,47 @@
 package com.hotel;
 
-import com.hotel.exceptions.RoomNotAvailableException;
-import com.hotel.exceptions.InvalidReservationException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
-        // Create a hotel
+        // Create hotel
         Hotel hotel = new Hotel("Grand Plaza", "Cityville");
 
-        // Add rooms to the hotel
-        Room r1 = new Room(101, "Single", 2000.0);
-        Room r2 = new Room(102, "Double", 3500.0);
-        Room r3 = new Room(201, "Suite", 5000.0);
-        hotel.addRoom(r1);
-        hotel.addRoom(r2);
-        hotel.addRoom(r3);
+        // Lists to hold guests and reservations
+        List<Guest> guests = new ArrayList<>();
+        List<Reservation> reservations = new ArrayList<>();
 
-        // Create guests
-        Guest guest1 = new Guest("santhan", "ss@gmail.com", "9876543210");
+        // Load data from CSVs
+        DataManager.loadData(hotel, guests, reservations);
 
-        // Attempt reservations with exception handling
-        try {
-            // First reservation (should succeed)
-            hotel.bookRoom(r1, guest1, 1, "2025-10-01", "2025-10-05");
-
-            // Attempt to double-book the same room (should throw RoomNotAvailableException)
-            hotel.bookRoom(r1, guest1, 2, "2025-10-06", "2025-10-10");
-
-        } catch (RoomNotAvailableException e) {
-            System.out.println("Booking failed: " + e.getMessage());
-        } catch (InvalidReservationException e) {
-            System.out.println("Invalid reservation: " + e.getMessage());
-        }
-
+        // Print summary
         System.out.println("\nHotel summary:");
         System.out.println(hotel);
-        System.out.println("Rooms list: ");
+
+        System.out.println("\nRooms list:");
         for (Room r : hotel.getRooms()) {
             System.out.println(r);
         }
 
+        System.out.println("\nGuests list:");
+        for (Guest g : guests) {
+            System.out.println(g);
+        }
+
+        System.out.println("\nReservations list:");
+        for (Reservation res : reservations) {
+            System.out.println(res);
+        }
+
+        // Test search functionality
         System.out.println("\nSearch by room number (102):");
         Room found = hotel.searchRoomByNumber(102);
         System.out.println(found != null ? found : "Room not found.");
-
-        System.out.println("\nSearch rooms by type (Double):");
-        for (Room r : hotel.searchRoomsByType("Double")) {
-            System.out.println(r);
-        }
 
         System.out.println("\nSearch available rooms:");
         for (Room r : hotel.searchAvailableRooms()) {
             System.out.println(r);
         }
     }
-    
 }

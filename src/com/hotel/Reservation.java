@@ -25,7 +25,17 @@ public class Reservation {
         room.setAvail(false); // Mark the room as unavailable when reserved
     }
 
-    public String toString() {
+    public String getReserve() {
         return "Reservation ID: " + reserveID + "| " + guest.toString() + "| " + room.toString() + "| Check-In: " + InDate + "| Check-Out: " + OutDate;
     }
+
+    @Override
+    public String toString() { return getReserve();
+    }
+
+    public int getReserveID() { return reserveID; }
+    public Guest getGuest() { return guest; }
+    public Room getRoom() { return room; }
+    public String getInDate() { return InDate; }
+    public String getOutDate() { return OutDate; }
 }

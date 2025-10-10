@@ -20,7 +20,6 @@ public class Room {
     public String getType() {
         return type;
     }
-
     public double getPrice() {
         return price;
     }
