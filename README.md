@@ -42,7 +42,7 @@ Future phases? A little less dead simple, but still manageable.
 #### Phase Four
 
 * [ ] Integrate JDBC for database connectivity.
-* [ ] Persist room, guest, and reservation data.
+* [ ] Persist room, user, and reservation data.
 
 #### Phase Five
 
