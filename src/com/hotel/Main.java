@@ -3,6 +3,7 @@ package com.hotel;
 import javax.swing.SwingUtilities;
 // Import the specific dark L&F you want to use
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.hotel.ui.LoginFrame;
 
 public class Main {
     public static void main(String[] args) {

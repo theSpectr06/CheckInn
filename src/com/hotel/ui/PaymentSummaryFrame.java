@@ -1,4 +1,7 @@
-package com.hotel;
+package com.hotel.ui;
+
+import com.hotel.model.*;
+import com.hotel.dao.*;
 
 import com.hotel.exceptions.InvalidReservationException;
 

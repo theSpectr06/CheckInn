@@ -1,4 +1,4 @@
-package com.hotel;
+package com.hotel.model;
 
 // This class now represents a row in the 'rooms' table
 public class Room {

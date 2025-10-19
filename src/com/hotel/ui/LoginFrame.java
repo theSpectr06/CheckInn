@@ -1,4 +1,7 @@
-package com.hotel;
+package com.hotel.ui;
+
+import com.hotel.dao.UserDAO;
+import com.hotel.model.User;
 
 import javax.swing.*;
 import java.awt.*;

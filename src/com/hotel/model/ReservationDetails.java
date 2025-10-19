@@ -1,4 +1,4 @@
-package com.hotel;
+package com.hotel.model;
 
 // Helper class to hold joined data for the View Reservations UI
 public class ReservationDetails {
