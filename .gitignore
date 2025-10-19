@@ -1,1 +1,17 @@
+# IDE specific files
+.idea/
+*.iml
+*.iws
+
+# Build artifacts
+/out/
 /build/
+*.class
+/target/ # If you ever switch to Maven/Gradle
+
+# CRITICAL SECRETS
+.env
+db.properties 
+
+# Libraries
+/lib/*.jar
