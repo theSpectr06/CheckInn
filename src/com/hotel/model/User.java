@@ -1,4 +1,4 @@
-package com.hotel;
+package com.hotel.model;
 
 public class User {
     // Matches 'user_id' in the DB (will be set after INSERT)

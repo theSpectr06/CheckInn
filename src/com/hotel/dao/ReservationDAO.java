@@ -1,4 +1,8 @@
-package com.hotel;
+package com.hotel.dao;
+
+import com.hotel.model.*;
+
+import com.hotel.DBUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

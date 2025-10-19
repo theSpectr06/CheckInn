@@ -1,4 +1,4 @@
-package com.hotel;
+package com.hotel.model;
 
 import com.hotel.exceptions.InvalidReservationException;
 

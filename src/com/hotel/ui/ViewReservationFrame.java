@@ -1,4 +1,8 @@
-package com.hotel;
+package com.hotel.ui;
+
+import com.hotel.model.ReservationDetails;
+import com.hotel.model.User;
+import com.hotel.dao.ReservationDAO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

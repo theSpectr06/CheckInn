@@ -1,4 +1,4 @@
-package com.hotel;
+package com.hotel.model;
 
 public class Hotel {
     private int hotelId;      // New field to match the DB
