@@ -4,7 +4,7 @@ public class Hotel {
     private int hotelId;      // New field to match the DB
     private String name;
     private String address;
-    // We remove the List<Room> rooms field and all booking/search methods
+
 
     // Constructor for loading from DB
     public Hotel(int hotelId, String name, String address) {
