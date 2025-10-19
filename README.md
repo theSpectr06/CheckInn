@@ -1,7 +1,3 @@
-This is the updated `README.md` file, reflecting the project's current state as a secure, database-integrated GUI application. The original format, including the humorous and project-focused tone, has been maintained.
-
------
-
 # CheckInn – Hotel Reservation System
 
 CheckInn is a **Java-based hotel reservation system** is now a **database-connected GUI system**.
@@ -99,4 +95,5 @@ java -cp "lib/*:build" com.hotel.Main
 
 * This is for my **Java syllabus**.
 * Every phase exists only because the professor wants to see “concepts.”
+
 * If it breaks… well, that’s a feature for now.
