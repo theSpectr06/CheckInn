@@ -7,8 +7,6 @@ CheckInn is a **Java-based hotel reservation system** is now a **database-connec
 This project manages **rooms, users, and reservations** to make and view reservations.
 It's been built to practice **OOPS concepts in Java** and to satisfy all the syllabus requirements, including database connectivity and modern GUI design (yeah using swing, it's very serious).
 
-The syllabus demanded a circus, and I'm showing them who's the real clown is...
-
 ## Features
 
 ### Phase One (Initial Stage)
@@ -44,7 +42,6 @@ CheckInn/
 │   ├── DBUtil           # Database connection
 │   └── resources/       # Images and Icons
 ├── lib/                 # External JARs (flatlaf, mysql-connector)
-├── test/                # JUnit test classes (still future, but getting closer)
 ├── docs/                # Docs (proposal, design, notes)
 ├── build/               # Compiled .class files (ignored by Git)
 ├── .gitignore           # Ignore the trash (and the secrets!)
@@ -61,7 +58,6 @@ CheckInn/
 * **JDBC** (The bridge to the database)
 * **FlatLaf** (Because light mode is a crime)
 * Git & GitHub
-* JUnit (still later)
 
 ## Getting Started
 
