@@ -46,7 +46,7 @@ public class RoomDetailsFrame extends JFrame implements ActionListener {
 
         add(headerPanel, BorderLayout.NORTH);
 
-        // --- 2. Summary Panel (Center) ---
+        // --- 2. Summary Panel ---
         JPanel summaryPanel = new JPanel(new BorderLayout());
         summaryPanel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEmptyBorder(10, 30, 10, 30),
@@ -75,10 +75,10 @@ public class RoomDetailsFrame extends JFrame implements ActionListener {
 
         add(summaryPanel, BorderLayout.CENTER);
 
-        // --- 3. Button Panel (South) ---
+        // --- 3. Button Panel ---
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 25, 20));
 
-        backButton = new JButton("Go Back (Change Selection)");
+        backButton = new JButton("Go Back");
         backButton.addActionListener(this);
         backButton.setPreferredSize(new Dimension(210, 40));
         backButton.setFont(new Font("SansSerif", Font.BOLD, 13));
@@ -131,20 +131,20 @@ public class RoomDetailsFrame extends JFrame implements ActionListener {
 
         // Build the summary text
         StringBuilder summary = new StringBuilder();
-        summary.append("═══════════════════════════════════════════════════════\n");
+        summary.append("═════════════════════════════════════════════════════════════════════\n");
         summary.append("                    BOOKING DETAILS\n");
-        summary.append("═══════════════════════════════════════════════════════\n\n");
+        summary.append("═════════════════════════════════════════════════════════════════════\n\n");
 
         summary.append("Guest Name:           ").append(loggedInUser.getName()).append("\n");
         summary.append("Email:                ").append(loggedInUser.getEmail()).append("\n");
         summary.append("Phone:                ").append(loggedInUser.getPhone()).append("\n\n");
 
-        summary.append("─────────────────────────────────────────────────────\n\n");
+        summary.append("───────────────────────────────────────────────────────────────────\n\n");
 
         summary.append("Hotel:                ").append(selectedHotel.getName()).append("\n");
         summary.append("Location:             ").append(selectedHotel.getAddress()).append("\n\n");
 
-        summary.append("─────────────────────────────────────────────────────\n\n");
+        summary.append("───────────────────────────────────────────────────────────────────\n\n");
 
         summary.append("Number of Rooms:      ").append(selectedRooms.size()).append("\n\n");
 
@@ -160,22 +160,24 @@ public class RoomDetailsFrame extends JFrame implements ActionListener {
             }
         }
 
-        summary.append("\n─────────────────────────────────────────────────────\n\n");
+        summary.append("        (Note: All displayed prices include GST)\n");
+
+        summary.append("\n───────────────────────────────────────────────────────────────────\n\n");
 
         summary.append("Check-In Date:        ").append(checkInDateStr).append("\n");
         summary.append("Check-Out Date:       ").append(checkOutDateStr).append("\n");
         summary.append("Number of Nights:     ").append(nights).append("\n\n");
 
-        summary.append("─────────────────────────────────────────────────────\n\n");
+        summary.append("───────────────────────────────────────────────────────────────────\n\n");
 
         summary.append(String.format("Subtotal/Night:       ₹%.2f\n", totalCostPerNight));
         summary.append(String.format("Nights:               × %d\n\n", nights));
 
-        summary.append("═══════════════════════════════════════════════════════\n\n");
+        summary.append("═════════════════════════════════════════════════════════════════════\n\n");
 
         summary.append(String.format("TOTAL AMOUNT:         ₹%.2f\n\n", grandTotal));
 
-        summary.append("═══════════════════════════════════════════════════════\n");
+        summary.append("═════════════════════════════════════════════════════════════════════\n");
 
         summaryTextArea.setText(summary.toString());
         nextButton.setEnabled(true);

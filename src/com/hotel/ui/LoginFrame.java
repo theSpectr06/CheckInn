@@ -18,30 +18,27 @@ public class LoginFrame extends JFrame implements ActionListener {
     private JButton registerButton;
 
     public LoginFrame() {
-        // Basic Frame Setup
         setTitle("CheckInn: Hotel Reservation System - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 450);
         setResizable(false);
-        setLocationRelativeTo(null); // Center the frame
+        setLocationRelativeTo(null);
 
-        // Use BorderLayout for the main structure
         setLayout(new BorderLayout(10, 10));
 
-        // --- 1. Header (Logo/Title) ---
+        // --- 1. Header ---
         JLabel logoLabel;
         try {
-            // Load the logo image (using the corrected relative path)
-            ImageIcon logoIcon = new ImageIcon(getClass().getResource("resources/banner.png"));
+            ImageIcon logoIcon = new ImageIcon(getClass().getResource("/com/hotel/resources/banner.png"));
             logoLabel = new JLabel(logoIcon, SwingConstants.CENTER);
         } catch (Exception e) {
-            // Fallback if the image fails to load
+            // if the image fails to load
             logoLabel = new JLabel("Welcome to CheckInn", SwingConstants.CENTER);
             logoLabel.setFont(new Font("SansSerif", Font.BOLD, 28));
         }
         add(logoLabel, BorderLayout.NORTH);
 
-        // --- 2. Central Form Panel (GridBagLayout for structure) ---
+        // --- 2. Central Form Panel ---
         JPanel formPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -60,7 +57,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                 emailField.getBorder(),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
-        // Add placeholder for email field
+        // placeholder for email field
         setPlaceholder(emailField, "Enter your email");
 
         formPanel.add(emailField, gbc);
@@ -78,12 +75,12 @@ public class LoginFrame extends JFrame implements ActionListener {
                 passwordField.getBorder(),
                 BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 
-        // Add placeholder for password field
+        // placeholder for password field
         setPasswordPlaceholder(passwordField, "Enter your password");
 
         formPanel.add(passwordField, gbc);
 
-        // --- 3. Button Panel (Moved closer to fields) ---
+        // --- 3. Button Panel ---
         gbc.gridx = 0; gbc.gridy = 2; gbc.gridwidth = 2; gbc.anchor = GridBagConstraints.CENTER;
         gbc.insets = new Insets(20, 10, 10, 10); // Gap between fields and buttons
 
@@ -91,15 +88,15 @@ public class LoginFrame extends JFrame implements ActionListener {
 
         loginButton = new JButton("Login");
         loginButton.addActionListener(this);
-        loginButton.setPreferredSize(new Dimension(120, 35)); // Increased button size
-        loginButton.setBackground(new Color(0, 153, 51)); // Darker green
+        loginButton.setPreferredSize(new Dimension(120, 35));
+        loginButton.setBackground(new Color(0, 153, 51));
         loginButton.setForeground(Color.WHITE);
         loginButton.setOpaque(true);
         loginButton.setBorderPainted(false);
 
         registerButton = new JButton("Register");
         registerButton.addActionListener(this);
-        registerButton.setPreferredSize(new Dimension(120, 35)); // Increased button size
+        registerButton.setPreferredSize(new Dimension(120, 35));
 
         buttonPanel.add(loginButton);
         buttonPanel.add(registerButton);
@@ -108,7 +105,7 @@ public class LoginFrame extends JFrame implements ActionListener {
 
         add(formPanel, BorderLayout.CENTER);
 
-        // **Usability Improvement: Set Default Button (ENTER key press)**
+        // Default Button**
         getRootPane().setDefaultButton(loginButton);
 
         setVisible(true);
@@ -217,7 +214,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         this.dispose();
     }
 
-    // Placeholder method to start the application (will be called from Main)
+    // Placeholder method to start the application
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new LoginFrame());
     }

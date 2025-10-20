@@ -16,7 +16,7 @@ public class Room {
         this.roomNo = roomNo;
         this.type = type;
         this.price = price;
-        this.isAvailable = isAvailable; // This will be set by the DAO query
+        this.isAvailable = isAvailable;
     }
 
     // --- Getters ---
@@ -27,7 +27,6 @@ public class Room {
     public double getPrice() { return price; }
     public boolean isAvailable() { return isAvailable; }
 
-    // NOTE: We keep setAvail() as a setter to be used by ReservationDAO later.
     public void setAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
     }

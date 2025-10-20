@@ -24,7 +24,7 @@ public class Hotel {
     public String getName() { return name; }
     public String getAddress() { return address; }
 
-    // --- Setters (optional, but good practice) ---
+    // --- Setters ---
     public void setHotelId(int hotelId) { this.hotelId = hotelId; }
 
     @Override

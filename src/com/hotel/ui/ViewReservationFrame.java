@@ -19,7 +19,7 @@ public class ViewReservationFrame extends JFrame {
         this.loggedInUser = user;
         setTitle("CheckInn: Reservations for " + user.getName());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(900, 600);
+        setSize(700, 400);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout(10, 10));
 
@@ -28,7 +28,7 @@ public class ViewReservationFrame extends JFrame {
         header.setFont(new Font("SansSerif", Font.BOLD, 24));
         add(header, BorderLayout.NORTH);
 
-        // --- 2. Table Setup (Center) ---
+        // --- 2. Table Setup ---
         String[] columnNames = {"Res ID", "Hotel Name", "Room Type", "Check-in", "Check-out", "Total (₹)"};
 
         // Use a DefaultTableModel to hold the data
@@ -46,8 +46,8 @@ public class ViewReservationFrame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(reservationTable);
         add(scrollPane, BorderLayout.CENTER);
 
-        // --- 3. Button Panel (South) ---
-        JButton backButton = new JButton("Back to Dashboard");
+        // --- 3. Button Panel ---
+        JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
             new DashboardFrame(loggedInUser);
             this.dispose();

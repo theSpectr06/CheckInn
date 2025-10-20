@@ -2,7 +2,6 @@ package com.hotel.ui;
 
 import com.hotel.model.*;
 import com.hotel.dao.*;
-import com.hotel.ui.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -100,6 +99,7 @@ public class MakeReservationFrame extends JFrame implements ActionListener {
         checkInDateChooser = new JDateChooser();
         checkInDateChooser.setDateFormatString("yyyy-MM-dd");
         checkInDateChooser.setPreferredSize(new Dimension(200, 30));
+        checkInDateChooser.setForeground(Color.WHITE);
         checkInDateChooser.setDate(new Date());
         styleJDateChooser(checkInDateChooser);
 
@@ -113,6 +113,7 @@ public class MakeReservationFrame extends JFrame implements ActionListener {
         checkOutDateChooser = new JDateChooser();
         checkOutDateChooser.setDateFormatString("yyyy-MM-dd");
         checkOutDateChooser.setPreferredSize(new Dimension(200, 30));
+        checkOutDateChooser.setForeground(Color.WHITE);
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, 1);
         checkOutDateChooser.setDate(cal.getTime());
@@ -136,7 +137,7 @@ public class MakeReservationFrame extends JFrame implements ActionListener {
 
         add(inputPanel, BorderLayout.NORTH);
 
-        // --- 3. Results Panel with JTable ---
+        // --- 3. Results Panel ---
         JPanel resultsPanel = new JPanel(new BorderLayout());
         resultsPanel.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(Color.GRAY),
@@ -205,6 +206,8 @@ public class MakeReservationFrame extends JFrame implements ActionListener {
 
     private void styleJDateChooser(JDateChooser dateChooser) {
         JTextField dateTextField = (JTextField) dateChooser.getDateEditor().getUiComponent();
+
+        dateTextField.setForeground(Color.WHITE);
         dateTextField.setBackground(new Color(45, 45, 45));
         dateTextField.setForeground(Color.WHITE);
         dateTextField.setFont(new Font("SansSerif", Font.PLAIN, 13));

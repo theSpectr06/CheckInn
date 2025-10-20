@@ -54,6 +54,4 @@ public class HotelDAO {
         }
         return hotels;
     }
-
-    // You could add a getHotelById(int id) method here if needed later
 }

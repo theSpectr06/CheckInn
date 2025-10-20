@@ -9,8 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-// The DAO (Data Access Object) pattern separates database logic
-// from business logic (Hotel, UI).
 public class UserDAO {
 
     /**
@@ -65,7 +63,6 @@ public class UserDAO {
         } catch (SQLException e) {
             // Handle SQL errors, especially unique constraint violations (e.g., email already exists)
             System.err.println("Error during user registration: " + e.getMessage());
-            // Optional: You can check e.getSQLState() for specific error codes
         } finally {
             // 6. Close resources in the reverse order of creation
             DBUtil.closeConnection(conn); // We rely on DBUtil to close the connection
@@ -74,8 +71,6 @@ public class UserDAO {
         }
         return false;
     }
-
-    // UserDAO.java (add this method)
 
     /**
      * Validates user credentials for login.
@@ -109,7 +104,6 @@ public class UserDAO {
 
                 // NOTE: In a real system, you'd use a hashing library (like BCrypt)
                 // to compare the hash of the entered password with the stored hash.
-                // For now, we use simple string comparison.
                 if (storedPassword.equals(password)) {
                     // Password matches, create and return the User object
                     int userId = rs.getInt("user_id");

@@ -12,7 +12,7 @@ public class Main {
             // Set the macOS-specific dark theme
             FlatMacDarkLaf.setup();
         } catch (Exception ex) {
-            System.err.println("Failed to initialize Mac Dark look and feel: " + ex);
+            System.err.println("Failed to initialize look and feel: " + ex);
         }
 
         SwingUtilities.invokeLater(() -> {

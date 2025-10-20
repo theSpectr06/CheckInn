@@ -30,7 +30,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
         headerLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
         add(headerLabel, BorderLayout.NORTH);
 
-        // --- 2. Central Form Panel (GridBagLayout) ---
+        // --- 2. Central Form Panel ---
         JPanel formPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -70,7 +70,7 @@ public class RegisterFrame extends JFrame implements ActionListener {
 
         add(formPanel, BorderLayout.CENTER);
 
-        // --- 3. Button Panel (FlowLayout) ---
+        // --- 3. Button Panel ---
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
 
         registerButton = new JButton("Register");

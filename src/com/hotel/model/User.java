@@ -1,12 +1,11 @@
 package com.hotel.model;
 
 public class User {
-    // Matches 'user_id' in the DB (will be set after INSERT)
     private int userId;
     private String name;
     private String email;
     private String phone;
-    private String password; // Added for registration/login
+    private String password;
 
     // Constructor for new registration (ID will be set by DB)
     public User(String name, String email, String phone, String password) {

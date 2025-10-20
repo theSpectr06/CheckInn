@@ -2,7 +2,6 @@ package com.hotel.ui;
 
 import com.hotel.model.*;
 import com.hotel.dao.*;
-
 import com.hotel.exceptions.InvalidReservationException;
 
 import javax.swing.*;
@@ -15,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentSummaryFrame extends JFrame implements ActionListener {
+
+    // Define the GST Rates
+    private static final double TOTAL_GST_RATE = 0.18; // 18% total GST
+    private static final double GST_DIVISOR = 1.0 + TOTAL_GST_RATE; // 1.18
 
     private User loggedInUser;
     private Hotel selectedHotel;
@@ -69,13 +72,13 @@ public class PaymentSummaryFrame extends JFrame implements ActionListener {
 
         add(headerPanel, BorderLayout.NORTH);
 
-        // --- 2. Summary Area (Center) ---
+        // --- 2. Summary Area ---
         JPanel summaryPanel = new JPanel(new BorderLayout());
         summaryPanel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createEmptyBorder(10, 30, 10, 30),
                 BorderFactory.createTitledBorder(
                         BorderFactory.createLineBorder(new Color(100, 100, 100), 2),
-                        "Final Payment Summary",
+                        "Final Payment Summary (Prices INCLUDE GST)", // Updated Title
                         0,
                         0,
                         new Font("SansSerif", Font.BOLD, 14)
@@ -92,7 +95,7 @@ public class PaymentSummaryFrame extends JFrame implements ActionListener {
         summaryArea.setLineWrap(true);
         summaryArea.setWrapStyleWord(true);
 
-        displaySummary();
+        displaySummary(); // Calls the new logic
 
         JScrollPane scrollPane = new JScrollPane(summaryArea);
         scrollPane.setBorder(null);
@@ -100,7 +103,7 @@ public class PaymentSummaryFrame extends JFrame implements ActionListener {
 
         add(summaryPanel, BorderLayout.CENTER);
 
-        // --- 3. Button Panel (South) ---
+        // --- 3. Button Panel ---
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 25, 20));
 
         cancelButton = new JButton("Cancel & Back to Dashboard");
@@ -108,7 +111,8 @@ public class PaymentSummaryFrame extends JFrame implements ActionListener {
         cancelButton.setPreferredSize(new Dimension(230, 40));
         cancelButton.setFont(new Font("SansSerif", Font.BOLD, 13));
 
-        confirmBookingButton = new JButton("Confirm & Pay ₹" + String.format("%.2f", totalCost));
+        // Update button text with the totalCost
+        confirmBookingButton = new JButton("Confirm & Pay ₹" + String.format("%,.2f", totalCost));
         confirmBookingButton.addActionListener(this);
         confirmBookingButton.setPreferredSize(new Dimension(230, 40));
         confirmBookingButton.setBackground(new Color(76, 175, 80));
@@ -124,63 +128,83 @@ public class PaymentSummaryFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    /** Formats and displays all final booking details. */
+    /** Formats and displays all final booking details, including the GST breakdown. */
     private void displaySummary() {
         long nights = ChronoUnit.DAYS.between(LocalDate.parse(checkInDateStr), LocalDate.parse(checkOutDateStr));
 
+        // --- GST Calculation ---
+        // 1. Calculate the Taxable Value (Base Price)
+        double taxableValueTotal = totalCost / GST_DIVISOR; // Gross / 1.18
+
+        // 2. Calculate the total GST amount
+        double totalGST = totalCost - taxableValueTotal;
+
+        // 3. Split into CGST and SGST
+        double cgst = totalGST / 2.0;
+        double sgst = totalGST / 2.0;
+
+        // --- Summary Output ---
+
         StringBuilder summary = new StringBuilder();
-        summary.append("═══════════════════════════════════════════════════════\n");
+        summary.append("═════════════════════════════════════════════════════════════════════\n");
         summary.append("                  FINAL PAYMENT SUMMARY\n");
-        summary.append("═══════════════════════════════════════════════════════\n\n");
+        summary.append("═════════════════════════════════════════════════════════════════════\n\n");
 
         summary.append(String.format("Guest Name:           %s\n", loggedInUser.getName()));
         summary.append(String.format("Guest ID:             %d\n", loggedInUser.getUserId()));
         summary.append(String.format("Email:                %s\n", loggedInUser.getEmail()));
         summary.append(String.format("Phone:                %s\n\n", loggedInUser.getPhone()));
 
-        summary.append("─────────────────────────────────────────────────────\n\n");
+        summary.append("───────────────────────────────────────────────────────────────────\n\n");
 
         summary.append(String.format("Hotel:                %s\n", selectedHotel.getName()));
         summary.append(String.format("Location:             %s\n\n", selectedHotel.getAddress()));
 
-        summary.append("─────────────────────────────────────────────────────\n\n");
+        // --- Room Details ---
+        summary.append("───────────────────────────── ROOMS ───────────────────────────────\n\n");
 
-        summary.append(String.format("Number of Rooms:      %d\n\n", selectedRooms.size()));
-
-        // List each room with details
         double subtotalPerNight = 0;
         for (int i = 0; i < selectedRooms.size(); i++) {
             Room room = selectedRooms.get(i);
             summary.append(String.format("Room %d:\n", i + 1));
-            summary.append(String.format("  - Room ID:          %d\n", room.getRoomId()));
             summary.append(String.format("  - Room Number:      %d\n", room.getRoomNo()));
             summary.append(String.format("  - Room Type:        %s\n", room.getType()));
-            summary.append(String.format("  - Price/Night:      ₹%.2f\n", room.getPrice()));
+            summary.append(String.format("  - Gross Price/Night:₹%,.2f\n", room.getPrice()));
             subtotalPerNight += room.getPrice();
             if (i < selectedRooms.size() - 1) {
                 summary.append("\n");
             }
         }
-
-        summary.append("\n─────────────────────────────────────────────────────\n\n");
+        summary.append("        (Note: All displayed prices include GST)\n");
+        summary.append("\n───────────────────────────────────────────────────────────────────\n\n");
 
         summary.append(String.format("Check-In Date:        %s\n", checkInDateStr));
         summary.append(String.format("Check-Out Date:       %s\n", checkOutDateStr));
-        summary.append(String.format("Number of Nights:     %d\n\n", nights));
+        summary.append(String.format("Number of Nights:     %d\n", nights));
 
-        summary.append("─────────────────────────────────────────────────────\n\n");
+        summary.append("───────────────────────────────────────────────────────────────────\n\n");
 
-        summary.append(String.format("Subtotal/Night:       ₹%.2f\n", subtotalPerNight));
-        summary.append(String.format("Nights:               × %d\n\n", nights));
+        // --- Base Cost and Breakdown ---
+        summary.append(String.format("1. Taxable Value:     ₹%,.2f\n", taxableValueTotal));
 
-        summary.append("═══════════════════════════════════════════════════════\n\n");
+        summary.append(String.format("2. ADD GST (%.0f%% Total):\n", TOTAL_GST_RATE * 100));
+        summary.append(String.format("   - CGST (%.1f%%):     ₹%,.2f\n", TOTAL_GST_RATE * 50, cgst)); // 9.0%
+        summary.append(String.format("   - SGST (%.1f%%):     ₹%,.2f\n", TOTAL_GST_RATE * 50, sgst)); // 9.0%
 
-        summary.append(String.format("GRAND TOTAL:          ₹%.2f\n\n", totalCost));
+        summary.append(String.format("3. Gross Subtotal:    ₹%,.2f\n", subtotalPerNight * nights));
 
-        summary.append("═══════════════════════════════════════════════════════\n");
+        summary.append("\n═════════════════════════════════════════════════════════════════════\n\n");
+
+        summary.append(String.format("TOTAL PAYABLE:        ₹%,.2f\n", totalCost)); // Should equal Gross Subtotal + Tax
+
+        summary.append("\n═════════════════════════════════════════════════════════════════════\n");
 
         summaryArea.setText(summary.toString());
     }
+
+    // Note: The roomCost saved in the Reservation object is currently the gross cost.
+    // If your DB required the base cost, you would adjust the roomCost calculation
+    // inside handleConfirmBooking(). For simplicity, we keep it as the gross total.
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -199,7 +223,7 @@ public class PaymentSummaryFrame extends JFrame implements ActionListener {
      */
     private void handleConfirmBooking() {
         int confirm = JOptionPane.showConfirmDialog(this,
-                String.format("Are you sure you want to confirm the payment of ₹%.2f for %d room(s)?",
+                String.format("Are you sure you want to confirm the payment of ₹%,.2f for %d room(s)?",
                         totalCost, selectedRooms.size()),
                 "Confirm Transaction", JOptionPane.YES_NO_OPTION);
 
@@ -211,7 +235,7 @@ public class PaymentSummaryFrame extends JFrame implements ActionListener {
 
                 // Create a reservation for each room
                 for (Room room : selectedRooms) {
-                    // Calculate cost for this specific room
+                    // Calculate cost for this specific room (Gross Cost is saved)
                     long nights = ChronoUnit.DAYS.between(
                             LocalDate.parse(checkInDateStr),
                             LocalDate.parse(checkOutDateStr));
@@ -231,8 +255,6 @@ public class PaymentSummaryFrame extends JFrame implements ActionListener {
                         reservationIds.add(resId);
                     } else {
                         allSuccessful = false;
-                        // If one fails, we should ideally rollback all previous ones
-                        // For now, just note the failure
                         break;
                     }
                 }

@@ -44,7 +44,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
         viewReservationsButton = new JButton("View My Reservations");
         logoutButton = new JButton("Logout");
 
-        // Add icons to buttons (using Unicode symbols as fallback)
+        // Add icons to buttons (using unicode symbols as fallback)
         try {
             addReservationButton.setIcon(UIManager.getIcon("FileView.fileIcon"));
         } catch (Exception e) {
@@ -66,7 +66,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
         // Style Buttons for uniform size, spacing, and colors
         Dimension buttonSize = new Dimension(350, 50); // Increased size
 
-        // Add Reservation Button - Green
+        // Add Reservation Button
         addReservationButton.setMaximumSize(buttonSize);
         addReservationButton.setPreferredSize(buttonSize);
         addReservationButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -77,7 +77,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
         addReservationButton.setFocusPainted(false);
         addReservationButton.setFont(new Font("SansSerif", Font.BOLD, 14));
 
-        // View Reservations Button - Dark Blue
+        // View Reservations Button
         viewReservationsButton.setMaximumSize(buttonSize);
         viewReservationsButton.setPreferredSize(buttonSize);
         viewReservationsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -88,7 +88,7 @@ public class DashboardFrame extends JFrame implements ActionListener {
         viewReservationsButton.setFocusPainted(false);
         viewReservationsButton.setFont(new Font("SansSerif", Font.BOLD, 14));
 
-        // Logout Button - Red
+        // Logout Button
         logoutButton.setMaximumSize(buttonSize);
         logoutButton.setPreferredSize(buttonSize);
         logoutButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -154,21 +154,20 @@ public class DashboardFrame extends JFrame implements ActionListener {
     }
 
     // --- Navigation Handlers ---
-
     private void handleNewReservation() {
-        // Step 4 on the roadmap: Open MakeReservationFrame
+        //Open MakeReservationFrame
         new MakeReservationFrame(loggedInUser);
         this.dispose();
     }
 
     private void handleViewReservations() {
-        // Step 7 on the roadmap: Open ViewReservationFrame
+        //Open ViewReservationFrame
         new ViewReservationFrame(loggedInUser);
         this.dispose();
     }
 
     private void handleLogout() {
-        // Navigation: Back to LoginFrame
+        //Back to LoginFrame
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?",
                 "Confirm Logout", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
