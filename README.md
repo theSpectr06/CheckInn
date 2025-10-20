@@ -1,15 +1,11 @@
-This is the updated `README.md` file, reflecting the project's current state as a secure, database-integrated GUI application. The original format, including the humorous and project-focused tone, has been maintained.
-
------
-
 # CheckInn – Hotel Reservation System
 
 CheckInn is a **Java-based hotel reservation system** is now a **database-connected GUI system**.
 
 ## Project Description
 
-This project manages **rooms, users, and reservations**.
-It's been built to practice **OOPS concepts in Java** and to satisfy all the syllabus requirements, including database connectivity, modern GUI design (yeah using swing, it's very serious), and critical security implementations.
+This project manages **rooms, users, and reservations** to make and view reservations.
+It's been built to practice **OOPS concepts in Java** and to satisfy all the syllabus requirements, including database connectivity and modern GUI design (yeah using swing, it's very serious).
 
 The syllabus demanded a circus, and I'm showing them who's the real clown is...
 
@@ -28,9 +24,7 @@ The syllabus demanded a circus, and I'm showing them who's the real clown is...
 
 * [x] **Minimal GUI:** Full Java Swing interface with modern **FlatMacDarkLaf** (Dark Mode) theming.
 * [x] **Architecture:** Applied **MVC Pattern** and **DAO Pattern** for clean separation of concerns.
-* [x] **Secure Config:** Database credentials handled via **Environment Variables** (no secrets on GitHub\!).
 * [x] **Data Persistence:** Integrated **JDBC** for secure **MySQL** connectivity.
-* [x] **UX Improvement:** Replaced awkward dropdowns with **JTable** single-selection (radio buttons) for room choosing.
 * [x] **Error Handling:** Added **Custom Exceptions** (`RoomNotAvailableException`, etc.) for cleaner errors.
 
 ### Roadmap
@@ -43,17 +37,18 @@ The syllabus demanded a circus, and I'm showing them who's the real clown is...
 CheckInn/
 ├── src/com/hotel/
 │   ├── dao/             # Data Access Objects (UserDAO, RoomDAO, etc.)
-│   ├── frames/          # GUI Classes (LoginFrame, DashboardFrame)
+│   ├── ui/              # GUI Classes (LoginFrame, DashboardFrame)
 │   ├── model/           # Core Data Models (User, Room, Reservation)
+│   ├── exceptions/      # Custom exceptions
 │   ├── Main             # As the name suggests
 │   ├── DBUtil           # Database connection
 │   └── resources/       # Images and Icons
-├── lib/                 # External JARs (flatlaf, jbcrypt, mysql-connector)
-├── test/                 # JUnit test classes (still future, but getting closer)
-├── docs/                 # Docs (proposal, design, notes)
-├── build/                # Compiled .class files (ignored by Git)
-├── .gitignore            # Ignore the trash (and the secrets!)
-└── README.md             # This file
+├── lib/                 # External JARs (flatlaf, mysql-connector)
+├── test/                # JUnit test classes (still future, but getting closer)
+├── docs/                # Docs (proposal, design, notes)
+├── build/               # Compiled .class files (ignored by Git)
+├── .gitignore           # Ignore the trash (and the secrets!)
+└── README.md            # This file
 ```
 
 -----
@@ -65,16 +60,30 @@ CheckInn/
 * **Swing** (The beautiful UI layer)
 * **JDBC** (The bridge to the database)
 * **FlatLaf** (Because light mode is a crime)
-* Git & GitHub (still not submitting zip files)
+* Git & GitHub
 * JUnit (still later)
 
 ## Getting Started
 
-### Prerequisites
+### 1. Software & Database Prerequisites
+
+Before running the application, ensure you have the following installed and configured:
+
+* **Java Development Kit (JDK) 17+**
+* **MySQL Server** (Running locally on the standard port 3306).
+* **External Libraries:** The necessary JAR files (MySQL Connector, FlatLaf) must be present in the `lib/` folder and configured in your project's module dependencies.
+
+### 2. Database Setup (Schema Creation)
+
+You must create the database schema required by the application.
+
+1.  Log in to your MySQL server.
+2.  **Create the Database:** Execute `CREATE DATABASE CheckInn;`
+3.  **Load Schema:** Execute the SQL script provided in the `docs/` folder (e.g., `docs/schema.sql`) to create the necessary tables (`users`, `rooms`, `reservations`, etc.).
+
+### 3. Application Configuration
 
 You **must** configure your local MySQL credentials as environment variables for the application to connect securely.
-
-* Set `DB_USER` and `DB_PASSWORD` in your IDE's Run Configuration.
 
 ### Compile
 
@@ -98,5 +107,5 @@ java -cp "lib/*:build" com.hotel.Main
 ## Notes
 
 * This is for my **Java syllabus**.
-* Every phase exists only because the professor wants to see “concepts.”
 * If it breaks… well, that’s a feature for now.
+
